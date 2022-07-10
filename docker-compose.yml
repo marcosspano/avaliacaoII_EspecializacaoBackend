@@ -55,3 +55,9 @@ services:
       - eureka-service
     ports:
       - 8888:8888
+
+#  api-gateway:
+#    build: api-gateway
+#    container_name: api-gateway
+#    ports:
+#      - 8080:8080
