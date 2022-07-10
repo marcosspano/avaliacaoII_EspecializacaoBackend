@@ -47,3 +47,11 @@ services:
       - zipkin-service
     ports:
       - 8761:8761
+
+  config-server:
+    build: config-server
+    container_name: config-server
+    depends_on:
+      - eureka-service
+    ports:
+      - 8888:8888
