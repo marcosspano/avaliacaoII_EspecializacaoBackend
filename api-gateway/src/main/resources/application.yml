@@ -10,8 +10,8 @@ spring:
     base-url: http://zipkin-service:9411
   cloud:
     config:
-      profile: dev
-    gateway:
+      profile: ${PROFILE:dev}
+   gateway:
       discovery:
         locator:
           enabled: true

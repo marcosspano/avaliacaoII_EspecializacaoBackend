@@ -1,0 +1,53 @@
+server:
+  port: 8002
+  servlet:
+    context-path: /catalog/
+
+spring:
+  application:
+    name: catalog-service
+  config:
+    import: optional:configserver:http://config-service:8888
+  cloud:
+    config:
+      profile: ${PROFILE:dev}
+  data:
+    mongodb:
+      uri: mongodb://db-catalog-service:27019/db_catalog
+    rabbitmq:
+      username: ${RABBIT_USERNAME:guest}
+      password: ${RABBIT_PASSWORD:guest}
+      host: localhost
+      port: 5672
+  zipkin:
+    base-url: http://zipkin-service:9411/
+
+eureka:
+  instance:
+    hostname: eureka-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+
+queues:
+  api-serie:
+    name: serieQueue
+  api-movie:
+    name: movieQueue
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+info:
+  name: Servico Catalog
+  author: Marcos Spano
+  mail: e.marcosspano@gmail.com
+  severity: Medio

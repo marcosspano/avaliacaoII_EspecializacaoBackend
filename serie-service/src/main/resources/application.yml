@@ -1,0 +1,55 @@
+server:
+  port: 8004
+  servlet:
+    context-path: /series/
+
+spring:
+  application:
+    name: serie-service
+  zipkin:
+    base-url: http://zipkin-service:9411/
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: ${SENHA_DB_SERIE:12345}
+    url: jdbc:mysql://db-serie-service:3308//db_serie?createDatabaseIfNotExist=true&useTimezone=true&serverTimezone=UTC
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    format-sql: true
+  rabbitmq:
+    username: ${RABBIT_USERNAME:guest}
+    password: ${RABBIT_PASSWORD:guest}
+    host: localhost
+    port: 5672
+
+eureka:
+  instance:
+    hostname: eureka-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka
+
+queue:
+  api-serie:
+    name: serieQueue
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+info:
+  name: Servico Serie
+  author: Marcos Spano
+  mail: e.marcosspano@gmail.com
+  severity: Medio
+

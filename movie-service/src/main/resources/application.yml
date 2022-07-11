@@ -1,0 +1,58 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /movies/
+
+spring:
+  application:
+    name: movie-service
+  zipkin:
+    base-url: http://zipkin-service:9411/
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: ${SENHA_DB_MOVIE:12345}
+    url: jdbc:mysql://db-movie-service:3307//db_movie?createDatabaseIfNotExist=true&useTimezone=true&serverTimeZone=UTC
+  jpa:
+    #properties.hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    #hibernate.ddl-auto: update
+    hibernate:
+      ddl-auto: update
+    #generate-ddl: true
+    show-sql: true
+    format-sql: true
+  rabbitmq:
+    username: ${RABBIT_USERNAME:guest}
+    password: ${RABBIT_PASSWORD:guest}
+    host: localhost
+    port: 5672
+
+eureka:
+  instance:
+    hostname: eureka-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka
+
+queue:
+  api-movie:
+    name: movieQueue
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+info:
+  name: Servico Movie
+  author: Marcos Spano
+  mail: e.marcosspano@gmail.com
+  severity: Medio
+
