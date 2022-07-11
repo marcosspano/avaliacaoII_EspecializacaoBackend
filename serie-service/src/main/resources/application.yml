@@ -1,5 +1,5 @@
 server:
-  port: 8004
+  port: 8003
   servlet:
     context-path: /series/
 
@@ -12,7 +12,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: ${SENHA_DB_SERIE:12345}
-    url: jdbc:mysql://db-serie-service:3308//db_serie?createDatabaseIfNotExist=true&useTimezone=true&serverTimezone=UTC
+    url: jdbc:mysql://db-series-service:3308//db_serie?createDatabaseIfNotExist=true&useTimezone=true&serverTimezone=UTC
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:

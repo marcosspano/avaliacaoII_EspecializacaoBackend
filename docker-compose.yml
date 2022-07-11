@@ -74,6 +74,8 @@ services:
     build: movie-service
     container_name: movie-service
     restart: always
+    links:
+      - db-movie-service:mysql:8.0
     depends_on:
       - config-server
       - db-movie-service
@@ -90,6 +92,17 @@ services:
       - serie-service
       - db-catalog-service
     ports: 8002:8002
+
+  serie-service:
+    build: serie-service
+    container_name: serie-service
+    restart: always
+    links:
+      - db-series-service:mysql:8.0
+    depends_on:
+      - config-server
+      - db-series-service
+    ports: 8003:8003
 
   api-gateway:
     build: api-gateway
